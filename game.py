@@ -7,6 +7,8 @@ screen = pygame.display.set_mode((400, 400))
 pygame.display.set_caption("Chomp!")
 screen.fill((119, 28, 156))
 pygame.draw.rect(screen,(100,25,0) , (0, 380, 400, 400) ) #anchor point, height, width
+sand = pygame.image.load("assets/images/sand.png").convert() #load the image then blit it to the screen
+screen.blit(sand,(200,200,64,64))
 pygame.display.flip() #the screen works like stop-motion. there is a ping pong buffer where you draw on one and display on the other
 while True: #The loop defines your window
     for event in pygame.event.get():
