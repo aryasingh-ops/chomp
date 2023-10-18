@@ -1,12 +1,12 @@
 import pygame
-import time
 
-# let's define variables that make the code scale better/ get rid of teal:
-SCREEN_WIDTH = 400
-SCREEN_HEIGHT = 400
-SAND_HEIGHT = 20
-TILE_SIZE = 64  # tiles are square height == width
 pygame.init()
+# let's define variables that make the code scale better/ get rid of teal:
+TILE_SIZE = 64  # tiles are square height == width
+
+SCREEN_WIDTH = 8 * TILE_SIZE
+SCREEN_HEIGHT = 8 * TILE_SIZE
+SAND_HEIGHT = 20
 
 WATER_COLOR = (114, 159, 232)
 SAND_COLOR = (100, 25, 0)
@@ -18,8 +18,15 @@ screen.fill(WATER_COLOR)
 pygame.draw.rect(screen, SAND_COLOR,
                  (0, SCREEN_HEIGHT - SAND_HEIGHT, SCREEN_WIDTH, SAND_HEIGHT))  # anchor point, height, width
 sand = pygame.image.load("assets/images/sand.png").convert()  # load the image then blit it to the screen
-# screen.blit(sand,(200,200,64,64))
-screen.blit(sand, (200 - 32, 200 - 32))  # (0,0) is top left
+
+# blit sand tiles across the bottom of the screen:
+
+for i in range(SCREEN_WIDTH // TILE_SIZE):
+    screen.blit(sand, (TILE_SIZE * i, SCREEN_HEIGHT-(2*TILE_SIZE)))
+
+screen.blit(sand, (SCREEN_WIDTH // 2 - TILE_SIZE // 2,
+                   SCREEN_HEIGHT // 2 - TILE_SIZE // 2))
+
 pygame.display.flip()  # the screen works like stop-motion.
 # there is a ping pong buffer where you draw on one and display on the other
 while True:  # The loop defines your window
