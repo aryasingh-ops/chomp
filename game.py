@@ -1,5 +1,7 @@
 import pygame
 import random
+
+import fish
 from fish import *
 from settings import *
 
@@ -20,9 +22,10 @@ seaweed.set_colorkey((0, 0, 0))
 fish_graphic = pygame.image.load("assets/images/orange_fish.png").convert()
 fish_graphic.set_colorkey((0, 0, 0))
 
+my_fish = fish.Fish(200, 200)
 background = screen.copy()
+clock = pygame.time.Clock()
 
-my_fish = fish.FISH(200, 200)
 
 def draw_background():
     background.fill(WATER_COLOR)
@@ -54,19 +57,28 @@ pygame.display.flip()  # the screen works like stop-motion.
 while True:  # The loop defines your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            # print("NO YOU CANNOT ESCAPE MY PYGAME!!!")
-            print("thanks for playing!")
             pygame.quit()
         if event.type == pygame.KEYDOWN:
-            print(f"The {event.key} is pressed!")  # this shows you the number associates with each key
             if event.key == pygame.K_LEFT:
-                my_fish.move_left()
-                print("left arrow pressed")
+                my_fish.moving_left = True
             if event.key == pygame.K_RIGHT:
-                my_fish.move_right()
-                print("right arrow pressed")
+                my_fish.moving_right = True
+            if event.key == pygame.K_UP:
+                my_fish.moving_up = True
+            if event.key == pygame.K_DOWN:
+                my_fish.moving_down = True
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT:
+                my_fish.moving_left = False
+            if event.key == pygame.K_RIGHT:
+                my_fish.moving_right = False
+            if event.key == pygame.K_UP:
+                my_fish.moving_up = False
+            if event.key == pygame.K_DOWN:
+                my_fish.moving_down = False
 
+    my_fish.update()
     screen.blit(background, (0, 0))
     my_fish.draw(screen)
     pygame.display.flip()
-    # print(event.type)
+    clock.tick(60)
