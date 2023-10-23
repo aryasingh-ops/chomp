@@ -1,6 +1,6 @@
 import pygame
 import random
-
+import minnow
 import fish
 from fish import *
 from settings import *
@@ -23,6 +23,10 @@ fish_graphic = pygame.image.load("assets/images/orange_fish.png").convert()
 fish_graphic.set_colorkey((0, 0, 0))
 
 my_fish = fish.Fish(200, 200)
+NUM_MINNOWS =
+my_minnows = []
+for _ in range(NUM_MINNOWS):
+    my_minnows.append(minnow.Minnow(random.randint(0, SCREEN_WIDTH)))
 background = screen.copy()
 clock = pygame.time.Clock()
 
@@ -80,5 +84,6 @@ while True:  # The loop defines your window
     my_fish.update()
     screen.blit(background, (0, 0))
     my_fish.draw(screen)
+    my_minnow.draw(screen)
     pygame.display.flip()
     clock.tick(60)
