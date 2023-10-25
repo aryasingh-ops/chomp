@@ -4,7 +4,7 @@ from settings import *
 
 class Fish(pygame.sprite.Sprite):
     def __init__(self, x, y):
-
+        super().__init__()
         self.right_image = pygame.image.load("assets/images/orange_fish.png")
         self.right_image.set_colorkey((0, 0, 0))
         self.image = self.right_image
@@ -41,3 +41,6 @@ class Fish(pygame.sprite.Sprite):
 
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
+
+
+fish = pygame.sprite.Group()
