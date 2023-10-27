@@ -1,11 +1,10 @@
 import pygame
 from settings import *
-import fish
 
 
 class Minnow(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        super().__init__()  # super retrieves the sprite
+        super().__init__()
         self.right_image = pygame.image.load("assets/images/purple_minnow.png").convert()
         self.right_image.set_colorkey((0, 0, 0))
         self.left_image = pygame.transform.flip(self.right_image, True, False)
